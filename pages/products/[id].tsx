@@ -113,6 +113,35 @@ export const AddProductPage: React.FC<Props> = ({ item }) => {
               <ReactToPrint
                 trigger={() => <Button mt={3} w={'100%'}>Print</Button>}
                 content={() => componentRef.current}
+                pageStyle={`
+                  @media all {
+                    .page-break {
+                      display: none;
+                    }
+                  }
+                  
+                  @media print {
+                    html, body {
+                      height: initial !important;
+                      overflow: initial !important;
+                      -webkit-print-color-adjust: exact;
+                    }
+                  }
+                  
+                  @media print {
+                    .page-break {
+                      margin-top: 1rem;
+                      display: block;
+                      page-break-before: auto;
+                    }
+                  }
+                  
+                  @page {
+                    size: auto;
+                    margin-left: 70mm;
+                    margin-top: 100mm;
+                  }
+                `}
               />
             </Box>
           </Flex>
